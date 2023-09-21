@@ -1,4 +1,2 @@
 
-map $host $host_ip {
-  default "$HOST_IP";
-}
+map $HOST_IP $host_ip;
