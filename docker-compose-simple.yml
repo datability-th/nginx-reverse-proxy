@@ -10,6 +10,8 @@ services:
       - 443:443
     volumes:
       - ./nginx/simple-proxy/:/etc/nginx/conf.d/:ro
+      - ./template-variables:/etc/nginx/templates/10-variables.conf.template:ro
+
 
 # Run in Default Bridge Network
 # https://faun.pub/run-the-containers-in-default-bridge-network-with-docker-compose-yml-f8e57590722
