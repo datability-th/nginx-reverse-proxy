@@ -6,6 +6,7 @@ A simple proxy is to just map 80 to whatever localhost port there is.
 
 ```bash
 docker compose -f docker-compose-simple.yml up -d
+docker compose -f docker-compose-simple.yml down
 ```
 
 ## V2: Full Proxy With Certbot SSL
