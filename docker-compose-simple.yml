@@ -2,10 +2,14 @@ version: '3'
 
 services:
   webserver:
+    restart: always
     image: nginx:1.25.2
+    network_mode: bridge
     ports:
       - 80:80
       - 443:443
-    restart: always
     volumes:
       - ./nginx/simple-proxy/:/etc/nginx/conf.d/:ro
+
+# Run in Default Bridge Network
+# https://faun.pub/run-the-containers-in-default-bridge-network-with-docker-compose-yml-f8e57590722
