@@ -5,7 +5,7 @@ services:
     restart: always
     image: nginx:1.25.2
     network_mode: bridge
-    user: 0 # make it root first, else conf.d isn't writable
+    user: "${UID}:${GID}" # make it root first, else conf.d isn't writable
     ports:
       - 80:80
       - 443:443
