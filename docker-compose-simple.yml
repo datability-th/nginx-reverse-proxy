@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  webserver:
+    image: nginx:1.25.2
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/simple-proxy/:/etc/nginx/conf.d/:ro
