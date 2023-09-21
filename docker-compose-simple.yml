@@ -12,6 +12,8 @@ services:
     volumes:
       - ./nginx/simple-proxy/:/etc/nginx/conf.d/
       - ./template-variables:/etc/nginx/templates/10-variables.conf.template
+    env_file:
+      - .env
 
 
 # Run in Default Bridge Network
