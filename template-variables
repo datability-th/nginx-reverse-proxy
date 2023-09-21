@@ -1,8 +1,4 @@
-map $host_container {
-  default "$HOST_CONTAINER";
-}
 
-
-map $host_ip {
+map $host $host_ip {
   default "$HOST_IP";
 }
