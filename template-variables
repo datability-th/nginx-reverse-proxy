@@ -1,4 +1,11 @@
 # How map works
+# https://www.digitalocean.com/community/tutorials/how-to-use-nginx-s-map-module-on-ubuntu-20-04
+# https://serverfault.com/questions/577370/how-can-i-use-environment-variables-in-nginx-conf
+# This is the default configuration, but hard to read?
+# https://nginx.org/en/docs/http/ngx_http_map_module.html
+# Syntax:	map string $variable { ... }
+# Default:	—
+# Context:	http
 
 map $HOST_IP $host_ip {
     default "$HOST_IP";
