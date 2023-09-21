@@ -1,2 +1,5 @@
+# How map works
 
-map $HOST_IP $host_ip;
+map "" $host_ip {
+    default "$HOST_IP";
+};
