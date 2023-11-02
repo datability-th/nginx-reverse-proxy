@@ -4,7 +4,8 @@ services:
   webserver:
     restart: always
     image: nginx:1.25.2
-    network_mode: bridge
+    networks: 
+      - proxynet
     user: "${UID}:${GID}" # make it root first, else conf.d isn't writable
     ports:
       - 80:80
@@ -14,10 +15,17 @@ services:
       - ./template-variables:/etc/nginx/templates/10-variables.conf.template
     env_file:
       - .env
-
+networks:
+  proxynet:
+    external: true
 
 # Run in Default Bridge Network
 # https://faun.pub/run-the-containers-in-default-bridge-network-with-docker-compose-yml-f8e57590722
+# > Note Default Bridge Network doesn't work!!! You will use DNS from the host instead (Containers cant ping each other through container name)
+# https://stackoverflow.com/questions/70495521/why-docker-containers-are-not-pingable-to-each-other-through-container-name-in-t
+# > By default, a container inherits the DNS settings of the host, as defined in the /etc/resolv.conf configuration file. Containers that use the default bridge network get a copy of this file, whereas containers that use a custom network use Docker’s embedded DNS server, which forwards external DNS lookups to the DNS servers configured on the host.
+# To use docker network with multiple compose files, use external: true
+# https://stackoverflow.com/questions/38088279/communication-between-multiple-docker-compose-projects
 
 # Setting User ID
 # https://blog.giovannidemizio.eu/2021/05/24/how-to-set-user-and-group-in-docker-compose/
