@@ -17,7 +17,8 @@ services:
       - .env
 networks:
   proxynet:
-    external: true
+    name: proxynet
+    driver: bridge
 
 # Run in Default Bridge Network
 # https://faun.pub/run-the-containers-in-default-bridge-network-with-docker-compose-yml-f8e57590722
