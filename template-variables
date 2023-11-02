@@ -10,3 +10,8 @@
 map $HOST_IP $host_ip {
     default "$HOST_IP";
 }
+
+
+map $HOST_CONTAINER $host_container {
+    default "$HOST_CONTAINER";
+}
