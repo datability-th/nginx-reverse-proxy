@@ -1,5 +1,12 @@
 # nginx-reverse-proxy
 
+For servers with multiple domains, just git clone it with custom folder name
+
+```bash
+git clone git@github.com:datability-th/nginx-reverse-proxy.git nginx-reverse-proxy-cms
+```
+
+
 ## V1: Simple Proxy
 
 A simple proxy is to just map 80 to whatever localhost port there is. 
