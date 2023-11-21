@@ -11,7 +11,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./nginx/conf/:/etc/nginx/conf.d/
       - ./template-variables:/etc/nginx/templates/10-variables.conf.template
       - ./certbot/www:/var/www/certbot/:ro  # for acme-challenge
       - ./certbot/conf/:/etc/nginx/ssl/:ro  # for the certificates
