@@ -1,9 +1,13 @@
 # nginx-reverse-proxy
 
-For servers with multiple domains, just git clone it with custom folder name
+For servers with multiple domains, we CANT git clone it with custom folder name - because port 443 is already allocated. There will be only ONE instance of nginx, and add more `.conf` inside `./nginx/conf` folder instead!
 
-```bash
-git clone git@github.com:datability-th/nginx-reverse-proxy.git nginx-reverse-proxy-cms
+```
+nginx/
+  |-- conf/
+       |--  server.conf
+       |--  server2.conf
+       |--  ...
 ```
 
 
@@ -22,6 +26,7 @@ docker compose -f docker-compose-simple.yml stop
 
 ```bash
 docker compose up -d
+docker compose down
 ```
 
 Prepping Dry Run [link](https://mindsers.blog/en/post/https-using-nginx-certbot-docker/). This is to test (Dry Run) create an ACME Request 
@@ -35,6 +40,22 @@ docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/cert
 
 # Manual Renewal
 docker compose run --rm certbot renew
+```
+
+Set CertBot renewal in Cron with `crontab -e` 
+[link](https://serverfault.com/questions/790772/best-practices-for-setting-a-cron-job-for-lets-encrypt-certbot-renewal)
+
+>The certbot documentation recommends running the script twice a day
+
+
+```bash
+# minute	0-59  
+# hour	0-23
+# Day of the month	1-31
+# month	1-12 or JAN-DEC
+# Day of the week	0-6 or SUN-SAT
+# Run everyday on 0:59 >>
+59 0 * * * cd /root/nginx-reverse-proxy && docker compose run --rm certbot renew
 ```
 
 
@@ -58,6 +79,8 @@ We use the variables from `envsubst` https://serverfault.com/questions/577370/ho
 >But envsubst may be used as a workaround if you need to generate your nginx configuration dynamically before nginx starts.
 
 Check the network by `docker inspect {container_name}`
+
+OR `docker network inspect {network_name}`, we can see the containers inside.
 
 You can reach containers by name if the `docker network` is the same. However, I think that the default `bridge` network doesn't work?   
   If it doesn't work, need to link by IP???
