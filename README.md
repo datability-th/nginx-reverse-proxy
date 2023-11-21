@@ -13,6 +13,15 @@ docker compose -f docker-compose-simple.yml stop
 
 ## V2: Full Proxy With Certbot SSL
 
+```bash
+docker compose up -d
+```
+
+Prepping Dry Run [link](https://mindsers.blog/en/post/https-using-nginx-certbot-docker/)
+
+```bash
+docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d automationpark.or.th
+```
 
 
 # Dev Notes

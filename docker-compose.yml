@@ -2,15 +2,28 @@ version: '3'
 
 services:
   webserver:
+    restart: always
     image: nginx:1.25.2
+    networks: 
+      - proxynet
+    user: "${UID}:${GID}" # make it root first, else conf.d isn't writable
     ports:
       - 80:80
       - 443:443
-    restart: always
     volumes:
       - ./nginx/conf/:/etc/nginx/conf.d/:ro
-      - ./certbot/www:/var/www/certbot/:ro
+      - ./template-variables:/etc/nginx/templates/10-variables.conf.template
+      - ./certbot/www:/var/www/certbot/:ro  # for acme-challenge
+      - ./certbot/conf/:/etc/nginx/ssl/:ro  # for the certificates
+    env_file:
+      - .env
   certbot:
     image: certbot/certbot:v2.6.0
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw  # The certificates are written here
+
+networks:
+  proxynet:
+    name: proxynet
+    driver: bridge
