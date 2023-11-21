@@ -17,10 +17,17 @@ docker compose -f docker-compose-simple.yml stop
 docker compose up -d
 ```
 
-Prepping Dry Run [link](https://mindsers.blog/en/post/https-using-nginx-certbot-docker/)
+Prepping Dry Run [link](https://mindsers.blog/en/post/https-using-nginx-certbot-docker/). This is to test (Dry Run) create an ACME Request 
 
 ```bash
-docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d automationpark.or.th
+# Dry Run
+docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d automationpark.or.th -d www.automationpark.or.th
+
+# Actual Run --> see results in ./certbot/conf/live/automationpark.or.th
+docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d automationpark.or.th -d www.automationpark.or.th
+
+# Manual Renewal
+docker compose run --rm certbot renew
 ```
 
 
