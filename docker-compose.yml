@@ -27,3 +27,7 @@ networks:
   proxynet:
     name: proxynet
     driver: bridge
+    ipam: 
+      config:
+        - subnet: 172.23.0.0/16
+          gateway: 172.23.0.1
